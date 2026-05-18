@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MCL35M — F1 2021 McLaren 3D Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Barlow+Condensed:wght@200;400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    3D Models
+  </div>
+  <nav>
+    <a href="#viewer" class="active">Viewer</a>
+    <a href="#specs">Specs</a>
+    <a href="#textures">Textures</a>
+  </nav>
+  <div class="badge">F1 · 2021 Season</div>
+</header>
+
+<!-- CANVAS SECTION -->
+<section id="viewer">
+  <div id="canvas-wrap">
+
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-car">MCL35M</div>
+      <div class="loader-sub">Initialising 3D Model</div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="progress-label" id="prog-label">0%</div>
+    </div>
+
+    <!-- ERROR -->
+    <div id="error-msg">
+      <strong>Model Load Failed</strong>
+      <p>Could not load the GLTF model. Please ensure <code>scene.gltf</code>, <code>scene.bin</code>, and all files inside the <code>textures/</code> folder are in the correct directory.</p>
+    </div>
+
+    <canvas id="three-canvas"></canvas>
+
+    <!-- HUD OVERLAYS -->
+    <div class="hud-corner hud-tl">
+      <span class="hud-line">Season <span class="hud-val">2021</span></span>
+      <span class="hud-line">Team <span class="hud-val">McLaren F1</span></span>
+      <span class="hud-line">Chassis <span class="hud-val">MCL35M</span></span>
+    </div>
+    <div class="hud-corner hud-tr">
+      <span class="hud-line">Drivers <span class="hud-val">Norris · Ricciardo</span></span>
+      <span class="hud-line">PU <span class="hud-val">Mercedes M12 E Perf.</span></span>
+      <span class="hud-line">Tyres <span class="hud-val">Pirelli P Zero</span></span>
+    </div>
+
+    <!-- TITLE -->
+    <div class="hero-title">
+      <h1>McLaren<br>MCL35M</h1>
+      <div class="subtitle">Formula One · 2021</div>
+    </div>
+
+    <!-- CONTROLS HINT -->
+    <div class="controls-hint">
+      <div class="ctrl-item"><div class="ctrl-icon">⟳</div>Drag to rotate</div>
+      <div class="ctrl-item"><div class="ctrl-icon">⊕</div>Scroll to zoom</div>
+      <div class="ctrl-item"><div class="ctrl-icon">⇧</div>Right-drag to pan</div>
+    </div>
+
+    <!-- AUTO-ROTATE TOGGLE -->
+    <button id="auto-rotate-btn" title="Toggle auto-rotate">
+      <span id="rotate-icon">⏸</span> Auto-Rotate
+    </button>
+
+    <!-- RESET VIEW BUTTON -->
+    <button id="reset-btn" title="Reset camera">↺ Reset</button>
+
+  </div><!-- /canvas-wrap -->
+</section>
+
+<!-- INFO PANEL -->
+<div id="info-panel">
+
+  <div class="info-grid">
+    <div class="info-cell">
+      <div class="cell-label">Constructor</div>
+      <div class="cell-value">McLaren</div>
+    </div>
+    <div class="info-cell">
+      <div class="cell-label">Power Unit</div>
+      <div class="cell-value">Mercedes</div>
+    </div>
+    <div class="info-cell">
+      <div class="cell-label">Season Points</div>
+      <div class="cell-value orange">275</div>
+    </div>
+    <div class="info-cell">
+      <div class="cell-label">Championship</div>
+      <div class="cell-value">P3</div>
+    </div>
+  </div>
+
+  <div class="spec-section" id="specs">
+    <div>
+      <div class="spec-title">Technical <span>Specifications</span></div>
+      <div class="spec-table">
+        <div class="spec-row"><span class="spec-key">Chassis</span><span class="spec-val">Carbon fibre monocoque</span></div>
+        <div class="spec-row"><span class="spec-key">Power Unit</span><span class="spec-val accent">Mercedes M12 E Performance</span></div>
+        <div class="spec-row"><span class="spec-key">Displacement</span><span class="spec-val">1.6L V6 Hybrid Turbo</span></div>
+        <div class="spec-row"><span class="spec-key">Max Power</span><span class="spec-val accent">~1000 bhp (combined)</span></div>
+        <div class="spec-row"><span class="spec-key">Max RPM</span><span class="spec-val">15,000 rpm</span></div>
+        <div class="spec-row"><span class="spec-key">Gearbox</span><span class="spec-val">8-speed seamless shift</span></div>
+        <div class="spec-row"><span class="spec-key">Suspension (F/R)</span><span class="spec-val">Pushrod / Pullrod</span></div>
+        <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">752 kg (incl. driver)</span></div>
+        <div class="spec-row"><span class="spec-key">Tyres</span><span class="spec-val accent">Pirelli P Zero 13″</span></div>
+        <div class="spec-row"><span class="spec-key">Livery</span><span class="spec-val">Papaya Orange / Gulf Blue</span></div>
+      </div>
+    </div>
+    <div id="textures">
+      <div class="spec-title">Model <span>Textures</span></div>
+      <div class="texture-grid">
+        <div class="tex-chip"><span>Body</span>mcl35m_png_baseColor</div>
+        <div class="tex-chip"><span>Cockpit</span>mcl35m_c_png_baseColor</div>
+        <div class="tex-chip"><span>Halo</span>mcl35m_h_png_baseColor</div>
+        <div class="tex-chip"><span>Misc</span>mcl35m_m_png_baseColor</div>
+        <div class="tex-chip"><span>Steering</span>st_wheel_png_baseColor</div>
+        <div class="tex-chip"><span>Tread</span>tread_png_baseColor</div>
+        <div class="tex-chip"><span>Tyre Wall</span>tyrewall_png_baseColor</div>
+        <div class="tex-chip"><span>Format</span>GLTF 2.0 + .bin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="credit-strip">
+    <span>
+      Model: <a href="https://sketchfab.com/3d-models/f1-2021-mclaren-mcl35m-967ecec37468412083c40c62b3d7234d" target="_blank">"F1 2021 McLaren MCL35M"</a>
+      by <a href="https://sketchfab.com/excalibur" target="_blank">Excalibur</a>
+      · Licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY-4.0</a>
+    </span>
+    <span>Powered by Three.js r128</span>
+  </div>
+
+</div><!-- /info-panel -->
+
+<!-- THREE.JS from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Our own scripts -->
+<script src="js/gltf-loader.js"></script>
+<script src="js/viewer.js"></script>
+
+</body>
+</html>
